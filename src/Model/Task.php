@@ -27,4 +27,15 @@ class Task
         $statement->execute();
         return $statement->fetch();
     }
+    
+    public function createTask($data)
+    {
+        $statement = $this->database->prepare(
+            'INSERT INTO tasks (task, status) VALUES (:task, :status)'
+        );
+        $statement->bindParam('task', $data['task']);
+        $statement->bindParam('status', $data['status']);
+        $statement->execute();
+        return $this->getTask($this->database->lastInsertId());
+    }
 }
