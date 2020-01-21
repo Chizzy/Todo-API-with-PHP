@@ -38,7 +38,7 @@ class Task
         $statement->execute();
         return $this->getTask($this->database->lastInsertId());
     }
-    
+
     public function updateTask($data)
     {
         $statement = $this->database->prepare(
@@ -49,5 +49,15 @@ class Task
         $statement->bindParam('id', $data['task_id']);
         $statement->execute();
         return $this->getTask($data['task_id']);
+    }
+
+    public function deleteTask($task_id)
+    {
+        $statement = $this->database->prepare(
+            'DELETE FROM tasks WHERE id = :id'
+        );
+        $statement->bindParam('id', $task_id);
+        $statement->execute();
+        return ['message' => 'The task was deleted.'];
     }
 }
