@@ -12,10 +12,19 @@ class Task
 
     public function getTasks()
     {
-        $statement = $this->database->prepare(
+        $statement = $this->database->query(
             'SELECT * FROM tasks ORDER BY id'
         );
-        $statement->execute();
         return $statement->fetchAll();
+    }
+
+    public function getTask($task_id)
+    {
+        $statement = $this->database->prepare(
+            'SELECT * FROM tasks WHERE id = :id'
+        );
+        $statement->bindParam('id', $task_id);
+        $statement->execute();
+        return $statement->fetch();
     }
 }
