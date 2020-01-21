@@ -13,5 +13,17 @@ return [
             'name' => 'slim-app',
             'path' => __DIR__ . '/../logs/app.log',
         ],
+
+        // API
+        'api' => [
+            'version' => 'v1',
+            'base_url' => 'http://localhost:8888',
+        ],
+
+        // Database
+        'db' => [
+            'dsn' => 'sqlite',
+            'database' => __DIR__ . '/todo.db',
+        ],
     ],
 ];
