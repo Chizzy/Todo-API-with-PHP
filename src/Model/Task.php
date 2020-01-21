@@ -27,7 +27,7 @@ class Task
         $statement->execute();
         return $statement->fetch();
     }
-    
+
     public function createTask($data)
     {
         $statement = $this->database->prepare(
@@ -37,5 +37,17 @@ class Task
         $statement->bindParam('status', $data['status']);
         $statement->execute();
         return $this->getTask($this->database->lastInsertId());
+    }
+    
+    public function updateTask($data)
+    {
+        $statement = $this->database->prepare(
+            'UPDATE tasks SET task = :task, status = :status WHERE id = :id'
+        );
+        $statement->bindParam('task', $data['task']);
+        $statement->bindParam('status', $data['status']);
+        $statement->bindParam('id', $data['task_id']);
+        $statement->execute();
+        return $this->getTask($data['task_id']);
     }
 }
