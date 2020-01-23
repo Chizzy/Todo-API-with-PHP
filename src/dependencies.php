@@ -21,6 +21,7 @@ $container['logger'] = function ($c) {
 // API
 $container['api'] = function ($c) {
     $api = $c->get('settings')['api'];
+    $api['api_url'] = $api['base_url'] . '/api/' . $api['version'];
     return $api;
 };
 
@@ -36,4 +37,9 @@ $container['db'] = function ($c) {
 // Tasks
 $container['task'] = function ($c) {
     return new \App\Model\Task($c->get('db'));
+};
+
+// Subtasks
+$container['subtask'] = function ($c) {
+    return new \App\Model\Subtask($c->get('db'));
 };
