@@ -50,5 +50,22 @@ $app->group('/api/v1/tasks', function () use ($app) {
             $result = $this->subtask->getSubtask($args['subtask_id']);
             return $response->withJson($result, 200, JSON_PRETTY_PRINT);
         });
+        $app->post('', function ($request, $response, $args) {
+            $data = $request->getParsedBody();
+            $data['task_id'] = $args['task_id'];
+            $result = $this->subtask->createSubtask($data);
+            return $response->withJson($result, 201, JSON_PRETTY_PRINT);
+        });
+        $app->put('/{subtask_id}', function ($request, $response, $args) {
+            $data = $request->getParsedBody();
+            $data['task_id'] = $args['task_id'];
+            $data['subtask_id'] = $args['subtask_id'];
+            $result = $this->subtask->updateSubtask($data);
+            return $response->withJson($result, 201, JSON_PRETTY_PRINT);
+        });
+        $app->delete('/{subtask_id}', function ($request, $response, $args) {
+            $result = $this->subtask->deleteSubtask($args['subtask_id']);
+            return $response->withJson($result, 200, JSON_PRETTY_PRINT);
+        });
     });
 });
