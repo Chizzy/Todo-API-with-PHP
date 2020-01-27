@@ -4,10 +4,10 @@
 
 $app->get('/', function ($request, $response, $args) {
     $endpoints = [
-        'all tasks' => $this->api['api_url'] . '/tasks',
-        'single task' => $this->api['api_url'] . '/tasks/{task_id}',
-        'subtasks of task' => $this->api['api_url'] . '/tasks/{task_id}/subtasks',
-        'single subtask' => $this->api['api_url'] . '/tasks/{task_id}/subtasks/{subtask_id}',
+        'all tasks' => $this->api['api_url'] . '/todos',
+        'single task' => $this->api['api_url'] . '/todos/{task_id}',
+        'subtasks of task' => $this->api['api_url'] . '/todos/{task_id}/subtasks',
+        'single subtask' => $this->api['api_url'] . '/todos/{task_id}/subtasks/{subtask_id}',
         'help' => $this->api['base_url'] . '/'
     ];
     $result = [
@@ -18,7 +18,7 @@ $app->get('/', function ($request, $response, $args) {
     return $response->withJson($result, 200, JSON_PRETTY_PRINT);
 });
 
-$app->group('/api/v1/tasks', function () use ($app) {
+$app->group('/api/v1/todos', function () use ($app) {
     $app->get('', function ($request, $response, $args) {
         $result = $this->task->getTasks();
         return $response->withJson($result, 200, JSON_PRETTY_PRINT);
