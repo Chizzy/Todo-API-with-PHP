@@ -31,6 +31,7 @@ $container['db'] = function ($c) {
     $pdo = new PDO($db['dsn'] . ':' . $db['database']);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    // Thank you Jennifer Nordell for this line ⬇️😁
     $pdo->exec('PRAGMA foreign_keys = ON;');
     return $pdo;
 };
